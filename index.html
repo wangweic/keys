@@ -37,11 +37,27 @@
 				s: 'souhu.com',
 				d: 'dior.cn',
 			}
+
+			var new_info = JSON.parse(localStorage.getItem('save') || 'null');
+			if(new_info) {
+				info = new_info;
+			}
 			for(var i = 0; i < keys.length; i++) {
 				var div1 = document.createElement('div'); //创建标签
 				for(var l = 0; l < keys[i].length; l++) {
 					var kbd = document.createElement('kbd'); //创建标签
 					kbd.textContent = keys[i][l];
+
+					btn = document.createElement('button');
+					btn.textContent = '编辑';
+					btn.id = keys[i][l];
+					btn.onclick = function(event) {
+						var keys = event.target.id;
+						var texts = prompt('请输入修改地址');
+						info[keys] = texts;
+						localStorage.setItem('save', JSON.stringify(info));
+					}
+					kbd.appendChild(btn);
 					div1.appendChild(kbd);
 				}
 				keya.appendChild(div1); //放到页面中
@@ -49,8 +65,7 @@
 			document.onkeypress = function(event) {
 				var code = event['key'];
 				var href = info[code];
-				//				location.href = 'http://' + href;
-				window.open('http://' + href,'_blank')
+				window.open('http://' + href, '_blank')
 			}
 		</script>
 	</body>
