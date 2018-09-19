@@ -36,6 +36,7 @@
 				a: 'alibaba.com',
 				s: 'souhu.com',
 				d: 'dior.cn',
+				m: 'mcdonalds.com.cn',
 			}
 
 			var new_info = JSON.parse(localStorage.getItem('save') || 'null');
@@ -46,17 +47,31 @@
 				var div1 = document.createElement('div'); //创建标签
 				for(var l = 0; l < keys[i].length; l++) {
 					var kbd = document.createElement('kbd'); //创建标签
-					kbd.textContent = keys[i][l];
-
+					var spans = document.createElement('span');
+					spans.textContent = keys[i][l];
+					spans.className = 'text';
+					kbd.appendChild(spans);
 					btn = document.createElement('button');
 					btn.textContent = '编辑';
 					btn.id = keys[i][l];
+
+					var imgs = document.createElement('img');
+
+					if(info[keys[i][l]]) {
+						imgs.src = '//' + info[keys[i][l]] + '/favicon.ico';
+					} else {
+						imgs.src = "http://thyrsi.com/t6/372/1537340029x-1566687610.png";
+					}
+					imgs.onerror = function(e){
+						e.target.src = "http://thyrsi.com/t6/372/1537340029x-1566687610.png";
+					}
 					btn.onclick = function(event) {
 						var keys = event.target.id;
 						var texts = prompt('请输入修改地址');
 						info[keys] = texts;
 						localStorage.setItem('save', JSON.stringify(info));
 					}
+					kbd.appendChild(imgs);
 					kbd.appendChild(btn);
 					div1.appendChild(kbd);
 				}

@@ -7,18 +7,42 @@ a {
 	text-decoration: none;
 }
 
+body {
+	height: 100vh;
+}
+
+main {
+	text-align: center;
+	height: 100vh;
+	background: #b7b7b7 url(images/img2.jpg) no-repeat center center;
+	background-size: cover;
+	/*图片自适应*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 kbd {
-	border: 1px solid red;
-	width: 3em;
-	height: 3em;
+	border: 1px solid #b7b7b7;
+	border-radius: 5px;
+	width: 50px;
+	height: 50px;
 	display: inline-block;
 	text-transform: uppercase;
-	margin-left: 5px;
+	margin-left: 9px;
+	margin-top: 8px;
 	position: relative;
+	color: #191919;
+	background: #ffffff;
 }
 
 #keya {
-	text-align: center;
+	padding: 56px 24px;
+	display: inline-block;
+	border: 1px solid #625544;
+	border-bottom: 9px solid #7d7d7d;
+	border-radius: 15px;
+	background: #cacaca;
 }
 
 #keya div {
@@ -26,19 +50,19 @@ kbd {
 }
 
 #keya div:nth-child(2) {
-	margin-left: 1em;
+	margin-left: -20px;
 }
 
 #keya div:nth-child(3) {
-	margin-left: 2em;
+	margin-left: -65px;
 }
 
 button {
 	position: absolute;
 	border: none;
 	font-size: 12px;
-	top: 36px;
-	left: 25px;
+	top: 31px;
+	left: 22px;
 	width: 2em;
 	background: #fff;
 	display: none;
@@ -47,4 +71,18 @@ button {
 kbd:hover button {
 	display: inline-block;
 	cursor: text;
+}
+
+kbd img {
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 30px;
+	left: 2px;
+}
+
+kbd span {
+	position: absolute;
+	top: 0px;
+	left: 15px;
 }
