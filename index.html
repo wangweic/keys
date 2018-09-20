@@ -26,49 +26,62 @@
 				q: 'qq.com',
 				w: '163.com',
 				e: 'ele.me',
-				r: 'renren.com',
 				t: 'taobao.com',
-				y: 'yidaimai.com',
 				u: 'uc.cn',
 				i: 'iconfont.cn',
 				o: 'oppo.com',
 				p: 'bilibili.com',
 				a: 'alibaba.com',
-				s: 'souhu.com',
+				s: 'sogou.com',
 				d: 'dior.cn',
-				m: 'mcdonalds.com.cn',
+				f: 'feixiaohao.com',
+				g: 'getmarkman.com',
+				h: 'huya.com',
+				k: 'kgc.cn',
+				l: 'layui.com',
+				z: 'zhihu.com',
+				c: 'cctv.com',
+				b: 'baidu.com',
 			}
 
-			var new_info = JSON.parse(localStorage.getItem('save') || 'null');
+			var new_info = getStorage('save');
 			if(new_info) {
 				info = new_info;
 			}
 			for(var i = 0; i < keys.length; i++) {
-				var div1 = document.createElement('div'); //创建标签
+				var div1 = createTagName('div'); //创建标签
 				for(var l = 0; l < keys[i].length; l++) {
-					var kbd = document.createElement('kbd'); //创建标签
-					var spans = document.createElement('span');
+					
+					var kbd = createTagName('kbd'); //创建标签
+					var spans = createTagName('span',{className:'text'});
 					spans.textContent = keys[i][l];
-					spans.className = 'text';
 					kbd.appendChild(spans);
-					btn = document.createElement('button');
+					
+					btn = createTagName('button');
 					btn.textContent = '编辑';
 					btn.id = keys[i][l];
 
-					var imgs = document.createElement('img');
-
+					var imgs = createTagName('img');
 					if(info[keys[i][l]]) {
 						imgs.src = '//' + info[keys[i][l]] + '/favicon.ico';
 					} else {
-						imgs.src = "http://thyrsi.com/t6/372/1537340029x-1566687610.png";
+						imgs.src = "./images/yuan.png";
 					}
-					imgs.onerror = function(e){
-						e.target.src = "http://thyrsi.com/t6/372/1537340029x-1566687610.png";
+					//img出错误显示的图片
+					imgs.onerror = function(e) {
+						e.target.src = "./images/yuan.png";
 					}
+					
 					btn.onclick = function(event) {
 						var keys = event.target.id;
+						var btn2 = event.target.previousSibling;
 						var texts = prompt('请输入修改地址');
 						info[keys] = texts;
+						btn2.src = '//' + texts + '/favicon.ico';
+						btn2.onerror = function(e) {
+							e.target.src = "./images/yuan.png";
+						}
+
 						localStorage.setItem('save', JSON.stringify(info));
 					}
 					kbd.appendChild(imgs);
@@ -81,6 +94,22 @@
 				var code = event['key'];
 				var href = info[code];
 				window.open('http://' + href, '_blank')
+			}
+
+			//封装localStorage
+			function getStorage(name) {
+				return JSON.parse(localStorage.getItem(name) || 'null');
+			}
+			
+			function createTagName(tag, attribute){
+				//创建标签
+				var Element = document.createElement(tag);
+				for (var keys in attribute) {
+					//keys className 
+					//attribute.keys = 'className的值'
+					Element[keys] = attribute[keys];
+				}
+				return Element;
 			}
 		</script>
 	</body>
